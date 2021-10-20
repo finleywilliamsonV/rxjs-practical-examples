@@ -111,10 +111,8 @@ export class HorseRaceComponent {
 
                 // calculate if we have a winner
                 if (bluePosition >= MAX_PERCENTAGE) {
-                    console.log('pushing the blue horse', this.blueHorse)
                     this.raceResults$.next(this.blueHorse)
                 } else if (redPosition >= MAX_PERCENTAGE) {
-                    console.log('pushing the red horse', this.redHorse)
                     this.raceResults$.next(this.redHorse)
                 }
             }),
