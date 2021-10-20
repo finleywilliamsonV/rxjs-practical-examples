@@ -1,12 +1,27 @@
 <div class="row">
-    <div class="col">
-        <input type="text">
-        <input type="text">
+
+    <!-- blue horse -->
+    <div class="col-12">
+        <fa-icon
+            class="blue horseIcon"
+            [style.left]="bluePosition + '%'"
+            [icon]="faHorse"></fa-icon>
+    </div>
+
+    <!-- red horse -->
+    <div class="col-12">
+        <fa-icon
+            class="red horseIcon"
+            [style.left]="redPosition + '%'"
+            [icon]="faHorse"></fa-icon>
     </div>
 </div>
 
 <div class="row">
-    <div class="col">
-        <p>Here is the text</p>
+    <div class="col text-center">
+        <button class="btn btn-success"
+        (click)="startRace()">
+            Start the Race!
+        </button>
     </div>
 </div>

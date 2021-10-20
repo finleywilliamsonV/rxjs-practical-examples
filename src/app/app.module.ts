@@ -5,7 +5,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { HomeComponent } from './components/home/home.component'
-import { CombineLatestComponent } from './components/operators/combine-latest/combine-latest.component'
+import { CombineLatestComponent } from './components/operators/combine-latest/combine-latest.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { CombineLatestComponent } from './components/operators/combine-latest/co
     imports: [
         BrowserModule,
         AppRoutingModule,
-        NgbModule
+        NgbModule,
+        FontAwesomeModule
     ],
     providers: [],
     bootstrap: [AppComponent],
