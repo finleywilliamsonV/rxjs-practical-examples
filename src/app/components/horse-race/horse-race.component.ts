@@ -21,7 +21,33 @@ interface HorseData {
 /**
  * The maximum percentage (horizontally) the horse can travel
  */
-const MAX_PERCENTAGE: number = 80
+const MAX_PERCENTAGE: number = 100
+
+/**
+ * Number of horses in the race
+ */
+const NUMBER_OF_HORSES: number = 5
+
+/**
+ * The amount of time between each movement turn
+ */
+const MOVEMENT_TURN_INTERVAL: number = 100
+
+/**
+ * The max percentage a horse can move in a single turn
+ */
+const MAX_MOVEMENT_PERCENT_PER_TURN: number = 2
+
+/**
+ * Various horse colors
+ */
+const HORSE_COLORS: string[] = [
+    'red',
+    'blue',
+    'green',
+    'purple',
+    'orange'
+]
 
 @Component({
     selector: 'app-horse-race',
@@ -32,15 +58,7 @@ export class HorseRaceComponent {
 
     public faHorse: IconDefinition = faHorse
 
-    public blueHorse: HorseData = {
-        position: 0,
-        color: 'blue',
-    }
-
-    public redHorse: HorseData = {
-        position: 0,
-        color: 'red',
-    }
+    public horses: HorseData[]
 
     private raceResults$: Subject<HorseData | null>
     public raceSubscription!: Subscription | null
@@ -48,6 +66,22 @@ export class HorseRaceComponent {
     public raceWinner!: HorseData | null
 
     constructor() {
+
+        // error handling
+        if (NUMBER_OF_HORSES > HORSE_COLORS.length) {
+            throw new Error('Number of colors should be greater or equal to number of horses')
+        }
+
+        // fill out the horses array
+        this.horses = []
+        for (let i = 0; i < NUMBER_OF_HORSES; i++) {
+            this.horses.push({
+                position: 0,
+                color: HORSE_COLORS[i],
+            })
+        }
+
+        // initilize the race variables
         this.raceStarted = false
         this.raceResults$ = new Subject<HorseData | null>()
 
@@ -65,15 +99,22 @@ export class HorseRaceComponent {
      */
     private resetRace(): void {
 
+        // reset the subscription
         if (this.raceSubscription) {
             this.raceSubscription.unsubscribe()
             this.raceSubscription = null
         }
 
-        this.redHorse.position = 0
-        this.blueHorse.position = 0
-        this.raceStarted = false
+        // reset the horse position
+        this.horses = this.horses.map((horse: HorseData) => (
+            {
+                ...horse,
+                position: 0,
+            }
+        ))
 
+        // reset the race
+        this.raceStarted = false
         this.raceResults$.next(null)
     }
 
@@ -89,7 +130,7 @@ export class HorseRaceComponent {
             return `${capitalizedColor} Wins!`
         }
 
-        return ''
+        return 'I should be hidden right now'
     }
     /**
      * Starts the horse race!
@@ -101,19 +142,22 @@ export class HorseRaceComponent {
         this.raceStarted = true
 
         this.raceSubscription = zip(
-            of(...HorseRaceComponent.generatePositionArray()),
-            of(...HorseRaceComponent.generatePositionArray()),
-            interval(500)
+            ...this.horses.map(
+                () => of(...HorseRaceComponent.generatePositionArray())
+            ),
+            interval(MOVEMENT_TURN_INTERVAL)
         ).pipe(
-            tap(([bluePosition, redPosition]) => {
-                this.blueHorse.position = bluePosition
-                this.redHorse.position = redPosition
+            tap((horsePositions: number[]) => {
 
-                // calculate if we have a winner
-                if (bluePosition >= MAX_PERCENTAGE) {
-                    this.raceResults$.next(this.blueHorse)
-                } else if (redPosition >= MAX_PERCENTAGE) {
-                    this.raceResults$.next(this.redHorse)
+                // update the horse positions
+                for (let i = 0; i < this.horses.length; i++) {
+                    const currentHorse: HorseData = this.horses[i]
+                    currentHorse.position = horsePositions[i]
+
+                    // calculate if we have a winner
+                    if (currentHorse.position >= MAX_PERCENTAGE) {
+                        this.raceResults$.next(currentHorse)
+                    }
                 }
             }),
             takeUntil(this.raceResults$),
@@ -130,14 +174,15 @@ export class HorseRaceComponent {
     private static generatePositionArray(): number[] {
 
         const finalPositionArray: number[] = []
-        const maxStep: number = 10
         let percentageRemaining: number = MAX_PERCENTAGE
         let currentPosition: number = 0
         let inifinteLoopGuard: number = 100
 
         while (percentageRemaining > 0 && --inifinteLoopGuard > 0) {
 
-            const nextStep: number = Math.floor(Math.random() * Math.min(maxStep, percentageRemaining)) + 1
+            const nextStep: number = Math.floor(
+                Math.random() * Math.min(MAX_MOVEMENT_PERCENT_PER_TURN, percentageRemaining)
+            ) + 1
 
             currentPosition += nextStep
 

@@ -13,21 +13,13 @@
 
 <div class="row">
 
-    <!-- blue horse -->
-    <div class="col-12">
+    <!-- horses -->
+    <div class="col-12" *ngFor="let horse of horses">
         <fa-icon
-            class="blue horseIcon"
-            [style.left]="blueHorse.position + '%'"
-            transform="grow-4"
-            [icon]="faHorse"></fa-icon>
-    </div>
-
-    <!-- red horse -->
-    <div class="col-12">
-        <fa-icon
-            class="red horseIcon"
-            [style.left]="redHorse.position + '%'"
-            transform="grow-4"
+            class="horseIcon"
+            [style.color]="horse.color"
+            [style.left]="horse.position + '%'"
+            transform="grow-18"
             [icon]="faHorse"></fa-icon>
     </div>
 </div>
@@ -36,9 +28,11 @@
 <div class="row">
     <div class="col text-center">
         <button
-            class="btn btn-success mt-2"
+            class="btn mt-2"
+            [class]="{'btn-success': !raceStarted, 'btn-secondary': raceStarted}"
+            [disabled]="raceStarted"
             (click)="startRace()">
-            Start the Race!
+            {{raceStarted ? 'Please Wait...' : 'Start the Race!'}}
         </button>
     </div>
 </div>
