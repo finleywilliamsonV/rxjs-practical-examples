@@ -2,19 +2,29 @@
     RxJS Practical Examples
 </h1>
 
-<!-- Combination Operators -->
+<!-- Horse Race -->
 <hr class="mt-5">
-<p class="h3"> + Combination Operators</p>
+<p class="h3">+ Horse Race</p>
 <hr>
 
-<div class="ml-5">
-    <!-- Combine Latest -->
-    <div class="row">
-        <div class="col">
-            <p class="h5"> - combineLatest()</p>
+<div class="row mx-5">
+    <div class="col">
+        <app-horse-race></app-horse-race>
+    </div>
+</div>
+
+<hr>
+
+<div class="row mx-5">
+    <div class="col">
+        <p class="h4">Operators Used</p>
+        <div class="row">
+            <div
+                class="col-4 operator-tag"
+                *ngFor="let operator of horseRaceOperators">
+                - {{operator + '()' }}
+            </div>
         </div>
     </div>
-    
-    <app-combine-latest></app-combine-latest>
-
 </div>
+<hr>

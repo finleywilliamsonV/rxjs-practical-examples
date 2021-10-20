@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core'
 })
 export class HomeComponent implements OnInit {
 
+    public horseRaceOperators: string[] = ['interval', 'of', 'zip', 'tap', 'takeUntil', 'finalize']
+
     constructor() { }
 
     ngOnInit(): void {

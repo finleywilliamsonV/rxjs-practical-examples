@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-12 text-center">
+
+        <p
+            class="h3"
+            [style.visibility]="!raceWinner ? 'hidden' : 'visible'"
+            [style.color]="raceWinner ? raceWinner.color : 'inherit'">
+            {{getRaceStatus()}}
+        </p>
+
+    </div>
+</div>
+
+<div class="row">
+
+    <!-- blue horse -->
+    <div class="col-12">
+        <fa-icon
+            class="blue horseIcon"
+            [style.left]="blueHorse.position + '%'"
+            transform="grow-4"
+            [icon]="faHorse"></fa-icon>
+    </div>
+
+    <!-- red horse -->
+    <div class="col-12">
+        <fa-icon
+            class="red horseIcon"
+            [style.left]="redHorse.position + '%'"
+            transform="grow-4"
+            [icon]="faHorse"></fa-icon>
+    </div>
+</div>
+
+<!-- start race button -->
+<div class="row">
+    <div class="col text-center">
+        <button
+            class="btn btn-success mt-2"
+            (click)="startRace()">
+            Start the Race!
+        </button>
+    </div>
+</div>
