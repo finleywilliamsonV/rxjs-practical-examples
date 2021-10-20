@@ -27,4 +27,30 @@
         </div>
     </div>
 </div>
+
+
+<!-- Bowling Ball -->
+<hr class="mt-5">
+<p class="h3">+ Bowling Ball</p>
 <hr>
+
+<div class="row mx-5">
+    <div class="col">
+        <app-bowling-ball></app-bowling-ball>
+    </div>
+</div>
+
+<hr>
+
+<div class="row mx-5">
+    <div class="col">
+        <p class="h4">Operators Used</p>
+        <div class="row">
+            <div
+                class="col-4 operator-tag"
+                *ngFor="let operator of horseRaceOperators">
+                - {{operator + '()' }}
+            </div>
+        </div>
+    </div>
+</div>

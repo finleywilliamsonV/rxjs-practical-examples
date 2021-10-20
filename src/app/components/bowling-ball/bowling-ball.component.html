@@ -1,1 +1,6 @@
-<p>bowling-ball works!</p>
+<fa-icon *ngFor="let ball of bowlingBalls"
+    class="bowlingBallIcon"
+    [style.color]="ball.color"
+    transform="grow-18"
+    [icon]="faBowlingBall">
+</fa-icon>
