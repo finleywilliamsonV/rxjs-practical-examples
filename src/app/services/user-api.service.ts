@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of } from 'rxjs'
-import { map, take, tap } from 'rxjs/operators'
+import { Observable } from 'rxjs'
+import { map, take } from 'rxjs/operators'
 import { User } from '../models/user.model'
 import { UserApiResult, UserData } from '../models/user-api-result.model'
 
