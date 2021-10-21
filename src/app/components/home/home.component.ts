@@ -7,7 +7,25 @@ import { Component } from '@angular/core'
 })
 export class HomeComponent {
 
-    public horseRaceOperators: string[] = ['interval', 'of', 'zip', 'tap', 'takeUntil', 'finalize']
+    public horseRaceOperators: string[] = [
+        'interval',
+        'of',
+        'zip',
+        'tap',
+        'takeUntil',
+        'finalize'
+    ]
+
+    public bowlingBallOperators: string[] = [
+        'combineLatest',
+        'concat',
+        'interval',
+        'of',
+        'zip',
+        'finalize',
+        'map',
+        'tap'
+    ]
 
     constructor() { }
 }

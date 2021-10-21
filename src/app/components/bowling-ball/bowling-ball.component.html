@@ -1,11 +1,26 @@
-<fa-icon *ngFor="let ball of bowlingBalls"
-    class="bowlingBallIcon"
-    [icon]="faBowlingBall"
-    [style.color]="ball.color"
-    [style.left]="ball.position + '%'"
-    transform="grow-18"
-    [spin]="true">
-</fa-icon>
+<div class="mt-2">
+    <fa-icon
+        *ngFor="let ball of bowlingBalls"
+        class="bowlingBallIcon"
+        [icon]="faBowlingBall"
+        [style.color]="ball.color"
+        [style.left]="ball.position + '%'"
+        transform="grow-18"
+        [spin]="ball.isRolling"
+        #bowlingBallIcons>
+    </fa-icon>
+</div>
 
+<!-- start race button -->
+<div class="row">
+    <div class="col text-center">
 
-
+        <button
+            class="btn mt-4"
+            [class]="{'btn-success': !rollingInProgress, 'btn-secondary': rollingInProgress}"
+            [disabled]="rollingInProgress"
+            (click)="rollTheBalls()">
+            {{rollingInProgress ? 'Please Wait...' : 'Roll the Balls!'}}
+        </button>
+    </div>
+</div>

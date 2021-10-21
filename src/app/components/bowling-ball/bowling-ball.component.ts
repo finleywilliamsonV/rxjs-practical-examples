@@ -7,11 +7,11 @@ import {
 } from 'rxjs'
 import { Component } from '@angular/core'
 import { faBowlingBall, IconDefinition } from '@fortawesome/free-solid-svg-icons'
-import { map, tap } from 'rxjs/operators'
+import { finalize, map, tap } from 'rxjs/operators'
 
-const PERCENT_OFF_SCREEN: number = -10
+const STARTING_PERCENT: number = 25
 const PERCENT_MOVEMENT_PER_TURN: number = 0.1
-const TIME_BETWEEN_TURNS: number = 10
+const TIME_BETWEEN_TURNS: number = 1
 
 const BALL_COLORS: string[] = [
     'red',
@@ -24,6 +24,7 @@ const BALL_COLORS: string[] = [
 interface BowlingBallData {
     color: string
     position: number
+    isRolling: boolean
 }
 
 @Component({
@@ -33,14 +34,33 @@ interface BowlingBallData {
 })
 export class BowlingBallComponent {
 
-    public faBowlingBall: IconDefinition = faBowlingBall
-    public bowlingBalls: BowlingBallData[]
-
+    faBowlingBall: IconDefinition = faBowlingBall
+    bowlingBalls: BowlingBallData[]
     private travelPositionArray: number []
+    rollingInProgress: boolean
+
+    // @ViewChildren('bowlingBallIcons') iconRefs!: QueryList<FaIconComponent>
+    // bowlingBallIcons: FaIconComponent[]
 
     constructor() {
-        let travelDistanceRemaining: number = Math.abs(PERCENT_OFF_SCREEN * 2) + 100 // in percent
-        let currentPosition: number = PERCENT_OFF_SCREEN
+        this.bowlingBalls = []
+        this.travelPositionArray = []
+        this.rollingInProgress = false
+
+        // this.bowlingBallIcons = []
+
+        this.setupTravelPositionArray()
+        this.setupBallArray()
+    }
+
+    // ngAfterViewInit(): void {
+    //     this.bowlingBallIcons = this.iconRefs.toArray()
+    //     console.log('this.bowlingBallIcons:', this.bowlingBallIcons)
+    // }
+
+    private setupTravelPositionArray(): void {
+        let travelDistanceRemaining: number = 100 - Math.abs(STARTING_PERCENT * 2) // in percent
+        let currentPosition: number = STARTING_PERCENT
         this.travelPositionArray = [currentPosition]
 
         while (travelDistanceRemaining > 0) {
@@ -48,45 +68,49 @@ export class BowlingBallComponent {
             travelDistanceRemaining -= PERCENT_MOVEMENT_PER_TURN
             this.travelPositionArray.push(currentPosition)
         }
+    }
 
-        this.bowlingBalls = [
+    private setupBallArray(): void {
+        this.bowlingBalls = BALL_COLORS.map((color: string) => (
             {
-                color: BALL_COLORS[0],
-                position: PERCENT_OFF_SCREEN,
-            },
-            {
-                color: BALL_COLORS[1],
-                position: PERCENT_OFF_SCREEN,
+                color,
+                position: STARTING_PERCENT,
+                isRolling: false,
             }
-        ]
-
-        this.rollTheBalls()
+        ))
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    public asNumber(numOrString: number | string): number {
-        return parseInt(String(numOrString), 10)
-    }
+    public rollTheBalls() {
 
-    private rollTheBalls() {
+        this.rollingInProgress = true
+
         concat(
-            ...this.bowlingBalls.map((bowlingBall: BowlingBallData) => combineLatest([
-                of(bowlingBall),
-                zip(
-                    of(...this.travelPositionArray),
-                    interval(TIME_BETWEEN_TURNS)
-                ).pipe(
-                    map(([position]) => position)
-                )
-            ]))
+            ...this.bowlingBalls.map((bowlingBall: BowlingBallData) =>
+                combineLatest([
+                    of(bowlingBall),
+                    zip(
+                        of(...this.travelPositionArray),
+                        interval(TIME_BETWEEN_TURNS)
+                    ).pipe(
+                        map(([position]) => position),
+                        tap(() => {
+                            bowlingBall.isRolling = true
+                        }),
+                        finalize(() => {
+                            bowlingBall.isRolling = false
+                        })
+                    )
+                ]))
         ).pipe(
-            tap(console.log),
             tap(
-                ([currentBall, currentPosition]) => {
-                    // eslint-disable-next-line no-param-reassign
+                ([currentBall, currentPosition]: [BowlingBallData, number]) => {
                     currentBall.position = currentPosition
                 }
-            )
+            ),
+            finalize(() => {
+                this.travelPositionArray.reverse()
+                this.rollingInProgress = false
+            })
         ).subscribe()
     }
 }

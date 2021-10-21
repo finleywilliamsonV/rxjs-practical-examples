@@ -1,10 +1,6 @@
 import { Component } from '@angular/core'
 import { faHorse, IconDefinition } from '@fortawesome/free-solid-svg-icons'
-import {
-    finalize,
-    takeUntil,
-    tap
-} from 'rxjs/operators'
+import { finalize, takeUntil, tap } from 'rxjs/operators'
 import {
     interval,
     of,
