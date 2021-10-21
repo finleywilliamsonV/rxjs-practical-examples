@@ -1,6 +1,11 @@
 <fa-icon *ngFor="let ball of bowlingBalls"
     class="bowlingBallIcon"
+    [icon]="faBowlingBall"
     [style.color]="ball.color"
+    [style.left]="ball.position + '%'"
     transform="grow-18"
-    [icon]="faBowlingBall">
+    [spin]="true">
 </fa-icon>
+
+
+

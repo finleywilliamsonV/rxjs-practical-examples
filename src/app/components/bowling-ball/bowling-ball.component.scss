@@ -1,4 +1,17 @@
 .bowlingBallIcon {
     position: relative;
     left: -40%;
+
+    // flip the animation
+    transform: scaleX(-1);
+    animation: spin-reverse 2s infinite linear;
+}
+
+@keyframes spin-reverse {
+    0% {
+        transform: scaleX(-1) rotate(-360deg);
+    }
+    100% {
+        transform: scaleX(-1) rotate(0deg);
+    }
 }
