@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewContainerRef } from '@angular/core'
+import { Component, ComponentFactoryResolver, ViewContainerRef } from '@angular/core'
 import { FruitPlantComponent } from './fruit-plant/fruit-plant.component'
 
 @Component({
@@ -6,16 +6,12 @@ import { FruitPlantComponent } from './fruit-plant/fruit-plant.component'
     templateUrl: './fruit-garden.component.html',
     styleUrls: ['./fruit-garden.component.scss'],
 })
-export class FruitGardenComponent implements OnInit {
+export class FruitGardenComponent {
 
     constructor(
         private viewContainerRef: ViewContainerRef,
         private componentFactoryResolver: ComponentFactoryResolver
     ) { }
-
-    ngOnInit(): void {
-        console.log('this.viewContainerRef:', this.viewContainerRef)
-    }
 
     soilClicked(e: MouseEvent) {
 
