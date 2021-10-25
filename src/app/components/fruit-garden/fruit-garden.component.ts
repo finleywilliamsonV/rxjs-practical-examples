@@ -19,14 +19,11 @@ export class FruitGardenComponent implements OnInit {
 
     soilClicked(e: MouseEvent) {
 
-        // const target: HTMLElement = e.target as HTMLElement
-
         const componentFactory = this.componentFactoryResolver
             .resolveComponentFactory<FruitPlantComponent>(FruitPlantComponent)
 
         const componentRef = this.viewContainerRef.createComponent<FruitPlantComponent>(componentFactory)
 
         componentRef.instance.setIconStyle('red', e.offsetX, e.offsetY)
-        console.log('componentRef.instance.iconStyles:', componentRef.instance.iconStyles)
     }
 }
