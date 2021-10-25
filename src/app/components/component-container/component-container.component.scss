@@ -1,6 +1,7 @@
 .container {
     background-color: rgb(241, 241, 241);
-    border: 1px solid rgba(0, 0, 0, 0.1)
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    min-width: 1140px;
 }
 .operator-tag {
     font-weight: bold;
