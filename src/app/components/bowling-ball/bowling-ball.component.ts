@@ -39,9 +39,6 @@ export class BowlingBallComponent {
     private travelPositionArray: number []
     rollingInProgress: boolean
 
-    // @ViewChildren('bowlingBallIcons') iconRefs!: QueryList<FaIconComponent>
-    // bowlingBallIcons: FaIconComponent[]
-
     constructor() {
         this.bowlingBalls = []
         this.travelPositionArray = []
@@ -52,11 +49,6 @@ export class BowlingBallComponent {
         this.setupTravelPositionArray()
         this.setupBallArray()
     }
-
-    // ngAfterViewInit(): void {
-    //     this.bowlingBallIcons = this.iconRefs.toArray()
-    //     console.log('this.bowlingBallIcons:', this.bowlingBallIcons)
-    // }
 
     private setupTravelPositionArray(): void {
         let travelDistanceRemaining: number = 100 - Math.abs(STARTING_PERCENT * 2) // in percent
