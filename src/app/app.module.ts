@@ -9,6 +9,7 @@ import { HomeComponent } from './components/home/home.component'
 import { HorseRaceComponent } from './components/horse-race/horse-race.component'
 import { BowlingBallComponent } from './components/bowling-ball/bowling-ball.component'
 import { ComponentContainerComponent } from './components/component-container/component-container.component'
+import { FruitGardenComponent } from './components/fruit-garden/fruit-garden.component'
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { ComponentContainerComponent } from './components/component-container/co
         HomeComponent,
         HorseRaceComponent,
         BowlingBallComponent,
-        ComponentContainerComponent
+        ComponentContainerComponent,
+        FruitGardenComponent
     ],
     imports: [
         BrowserModule,
