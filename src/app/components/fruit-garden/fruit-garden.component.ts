@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, ComponentFactoryResolver, OnInit, ViewContainerRef } from '@angular/core'
+import { FruitPlantComponent } from './fruit-plant/fruit-plant.component'
 
 @Component({
     selector: 'app-fruit-garden',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core'
 })
 export class FruitGardenComponent implements OnInit {
 
-    constructor() { }
+    constructor(
+        private viewContainerRef: ViewContainerRef,
+        private componentFactoryResolver: ComponentFactoryResolver
+    ) { }
 
     ngOnInit(): void {
+        console.log('this.viewContainerRef:', this.viewContainerRef)
     }
 
+    soilClicked(e: MouseEvent) {
+
+        // const target: HTMLElement = e.target as HTMLElement
+
+        const componentFactory = this.componentFactoryResolver
+            .resolveComponentFactory<FruitPlantComponent>(FruitPlantComponent)
+
+        const componentRef = this.viewContainerRef.createComponent<FruitPlantComponent>(componentFactory)
+
+        componentRef.instance.setIconStyle('red', e.offsetX, e.offsetY)
+        console.log('componentRef.instance.iconStyles:', componentRef.instance.iconStyles)
+    }
 }

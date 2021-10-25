@@ -17,22 +17,22 @@ interface HorseData {
 /**
  * The maximum percentage (horizontally) the horse can travel
  */
-const MAX_PERCENTAGE: number = 100
+const MAX_PERCENTAGE = 100
 
 /**
  * Number of horses in the race
  */
-const NUMBER_OF_HORSES: number = 5
+const NUMBER_OF_HORSES = 5
 
 /**
  * The amount of time between each movement turn
  */
-const MOVEMENT_TURN_INTERVAL: number = 100
+const MOVEMENT_TURN_INTERVAL = 100
 
 /**
  * The max percentage a horse can move in a single turn
  */
-const MAX_MOVEMENT_PERCENT_PER_TURN: number = 2
+const MAX_MOVEMENT_PERCENT_PER_TURN = 2
 
 /**
  * Various horse colors
@@ -171,8 +171,8 @@ export class HorseRaceComponent {
 
         const finalPositionArray: number[] = []
         let percentageRemaining: number = MAX_PERCENTAGE
-        let currentPosition: number = 0
-        let inifinteLoopGuard: number = 100
+        let currentPosition = 0
+        let inifinteLoopGuard = 100
 
         while (percentageRemaining > 0 && --inifinteLoopGuard > 0) {
 

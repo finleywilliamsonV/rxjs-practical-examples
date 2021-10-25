@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
 import { map, take } from 'rxjs/operators'
+import { Observable } from 'rxjs'
 import { User } from '../models/user.model'
 import { UserApiResult, UserData } from '../models/user-api-result.model'
 
@@ -10,7 +10,7 @@ import { UserApiResult, UserData } from '../models/user-api-result.model'
 })
 export class UserApiService {
 
-    private static nextUserId: number = 0
+    private static nextUserId = 0
 
     /**
      * Constructs the Users Service

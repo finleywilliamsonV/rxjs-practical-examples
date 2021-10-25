@@ -9,7 +9,4 @@ export class ComponentContainerComponent {
 
     @Input('title') title!: string
     @Input('operators') operatorsUsed!: string[]
-
-    constructor() { }
-
 }

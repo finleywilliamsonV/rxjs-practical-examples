@@ -26,6 +26,4 @@ export class HomeComponent {
         'map',
         'tap'
     ]
-
-    constructor() { }
 }

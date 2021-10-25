@@ -9,9 +9,9 @@ import { Component } from '@angular/core'
 import { faBowlingBall, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { finalize, map, tap } from 'rxjs/operators'
 
-const STARTING_PERCENT: number = 25
-const PERCENT_MOVEMENT_PER_TURN: number = 0.1
-const TIME_BETWEEN_TURNS: number = 1
+const STARTING_PERCENT = 25
+const PERCENT_MOVEMENT_PER_TURN = 0.1
+const TIME_BETWEEN_TURNS = 1
 
 const BALL_COLORS: string[] = [
     'red',
