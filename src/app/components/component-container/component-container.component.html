@@ -1,0 +1,24 @@
+<hr class="mt-5">
+<p class="h3">+ Horse Race</p>
+<hr>
+
+<div class="row mx-5">
+    <div class="col">
+        <app-horse-race></app-horse-race>
+    </div>
+</div>
+
+<hr>
+
+<div class="row mx-5">
+    <div class="col">
+        <p class="h4">Operators Used</p>
+        <div class="row">
+            <div
+                class="col-4 operator-tag"
+                *ngFor="let operator of horseRaceOperators">
+                - {{operator + '()' }}
+            </div>
+        </div>
+    </div>
+</div>
