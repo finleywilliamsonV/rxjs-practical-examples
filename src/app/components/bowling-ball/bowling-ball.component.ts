@@ -10,7 +10,7 @@ import { faBowlingBall, IconDefinition } from '@fortawesome/free-solid-svg-icons
 import { finalize, map, tap } from 'rxjs/operators'
 
 const STARTING_PERCENT = 25
-const PERCENT_MOVEMENT_PER_TURN = 0.1
+const PERCENT_MOVEMENT_PER_TURN = 0.3
 const TIME_BETWEEN_TURNS = 1
 
 const BALL_COLORS: string[] = [

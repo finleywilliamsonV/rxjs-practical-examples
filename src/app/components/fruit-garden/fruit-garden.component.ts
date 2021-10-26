@@ -41,6 +41,9 @@ export class FruitGardenComponent {
         componentRef.instance.setIconPosition(mE.offsetX, mE.offsetY)
     }
 
+    /**
+     * Clears all the fruit components from the dom
+     */
     clearAllFruit(): void {
         this.viewContainerRef.clear()
     }
