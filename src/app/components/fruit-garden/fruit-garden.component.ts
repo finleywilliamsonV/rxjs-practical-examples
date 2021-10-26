@@ -14,19 +14,34 @@ import { FruitPlantComponent } from './fruit-plant/fruit-plant.component'
 })
 export class FruitGardenComponent {
 
+    /**
+     * Constructs a garden where fruit can be planted
+     * @param viewContainerRef
+     * @param componentFactoryResolver
+     */
     constructor(
         private viewContainerRef: ViewContainerRef,
         private componentFactoryResolver: ComponentFactoryResolver
     ) { }
 
-    soilClicked(e: MouseEvent) {
+    /**
+     * Handler for click events that plants fruit plants
+     * @param mE the mouse event from the click
+     */
+    soilClicked(mE: MouseEvent) {
 
+        // create a component factory to create FruitPlantComponents
         const componentFactory: ComponentFactory<FruitPlantComponent> = this.componentFactoryResolver
             .resolveComponentFactory<FruitPlantComponent>(FruitPlantComponent)
 
+        // generate the new FruitPlantRef
         const componentRef: ComponentRef<FruitPlantComponent> = this.viewContainerRef
             .createComponent<FruitPlantComponent>(componentFactory)
 
-        componentRef.instance.setIconPosition(e.offsetX, e.offsetY)
+        componentRef.instance.setIconPosition(mE.offsetX, mE.offsetY)
+    }
+
+    clearAllFruit(): void {
+        this.viewContainerRef.clear()
     }
 }

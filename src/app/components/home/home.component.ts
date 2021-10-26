@@ -26,4 +26,12 @@ export class HomeComponent {
         'map',
         'tap'
     ]
+
+    public fruitGardenOperators: string[] = [
+        'interval',
+        'finalize',
+        'map',
+        'tap',
+        'takeWhile'
+    ]
 }
