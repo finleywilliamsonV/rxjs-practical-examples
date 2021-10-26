@@ -1,25 +1,42 @@
-import { Component, ViewContainerRef } from '@angular/core'
-import { faApple } from '@fortawesome/free-brands-svg-icons'
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { AfterViewInit, Component, ViewContainerRef } from '@angular/core'
+import { faSeedling, IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { interval } from 'rxjs'
+import { map, tap } from 'rxjs/operators'
 
 @Component({
     selector: 'app-fruit-plant',
     templateUrl: './fruit-plant.component.html',
     styleUrls: ['./fruit-plant.component.scss'],
 })
-export class FruitPlantComponent {
+export class FruitPlantComponent implements AfterViewInit {
 
-    public faApple: IconDefinition = faApple
+    public faSeedling: IconDefinition = faSeedling
     public iconStyles!: Record<string, string>
+    public iconTransform!: string
 
-    constructor(public viewContainerRef: ViewContainerRef) {}
-
-    setIconStyle(color: string, x: number, y: number) {
+    constructor(public viewContainerRef: ViewContainerRef) {
         this.iconStyles = {
-            color,
+            color: 'lightgreen',
             position: 'absolute',
+        }
+    }
+
+    ngAfterViewInit(): void {
+        interval(10)
+            .pipe(
+                map((val) => (val + 1) / 4),
+                tap((val) => {
+                    this.iconTransform = `grow-${val} up-${val * 0.45}`
+                })
+            )
+            .subscribe()
+    }
+
+    setIconPosition(x: number, y: number) {
+        this.iconStyles = {
+            ...this.iconStyles,
             left: `${x - 8}px`, // TODO: Figure out how to get this position without hardcoded vals
-            top: `${y + 113}px`, // TODO: Figure out how to get this position without hardcoded vals
+            top: `${y + 106}px`, // TODO: Figure out how to get this position without hardcoded vals
         }
     }
 

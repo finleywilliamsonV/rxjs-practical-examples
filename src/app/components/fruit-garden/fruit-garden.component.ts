@@ -1,4 +1,10 @@
-import { Component, ComponentFactoryResolver, ViewContainerRef } from '@angular/core'
+import {
+    Component,
+    ComponentFactory,
+    ComponentFactoryResolver,
+    ComponentRef,
+    ViewContainerRef
+} from '@angular/core'
 import { FruitPlantComponent } from './fruit-plant/fruit-plant.component'
 
 @Component({
@@ -15,11 +21,12 @@ export class FruitGardenComponent {
 
     soilClicked(e: MouseEvent) {
 
-        const componentFactory = this.componentFactoryResolver
+        const componentFactory: ComponentFactory<FruitPlantComponent> = this.componentFactoryResolver
             .resolveComponentFactory<FruitPlantComponent>(FruitPlantComponent)
 
-        const componentRef = this.viewContainerRef.createComponent<FruitPlantComponent>(componentFactory)
+        const componentRef: ComponentRef<FruitPlantComponent> = this.viewContainerRef
+            .createComponent<FruitPlantComponent>(componentFactory)
 
-        componentRef.instance.setIconStyle('red', e.offsetX, e.offsetY)
+        componentRef.instance.setIconPosition(e.offsetX, e.offsetY)
     }
 }
