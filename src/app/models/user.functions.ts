@@ -6,7 +6,7 @@ export const getPlaceholderUser: () => User = (
 
         return (): User => ({
             gender: 'male',
-            name: 'biggs',
+            name: `User ${placeholderId}`,
             email: 'cat@123.com',
             dob: new Date(),
             id: placeholderId++,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { Subject } from 'rxjs'
 import { scan, takeWhile, tap, finalize } from 'rxjs/operators'
 import { User } from '../../models/user.model'
 import { UserApiService } from '../../services/user-api.service'
@@ -11,11 +12,15 @@ import { UserApiService } from '../../services/user-api.service'
 export class AutocompleteComponent implements OnInit {
 
     public users: User[]
+    public input$: Subject<string>
 
     constructor(private userApiService: UserApiService) {
 
         // init users array
         this.users = []
+
+        // init input subject
+        this.input$ = new Subject<string>()
 
         // add 10 users to the array
         const numberOfUsers = 10
@@ -34,4 +39,13 @@ export class AutocompleteComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    public onInputEvent($event: Event) {
+        this.input$.next(($event.target as HTMLInputElement).value)
+    }
+
+    /* eslint-disable class-methods-use-this */
+    public clearInput() {
+        console.log('CLEAR')
+        this.input$.next('')
+    }
 }
