@@ -11,6 +11,7 @@ import { BowlingBallComponent } from './components/bowling-ball/bowling-ball.com
 import { ComponentContainerComponent } from './components/component-container/component-container.component'
 import { FruitGardenComponent } from './components/fruit-garden/fruit-garden.component'
 import { FruitPlantComponent } from './components/fruit-garden/fruit-plant/fruit-plant.component'
+import { AutocompleteComponent } from './components/autocomplete/autocomplete.component'
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { FruitPlantComponent } from './components/fruit-garden/fruit-plant/fruit
         BowlingBallComponent,
         ComponentContainerComponent,
         FruitGardenComponent,
-        FruitPlantComponent
+        FruitPlantComponent,
+        AutocompleteComponent
     ],
     imports: [
         BrowserModule,
