@@ -28,6 +28,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "@typescript-eslint/no-empty-function": "warn",
         "class-methods-use-this": "warn",
         "comma-dangle": [
             "error",

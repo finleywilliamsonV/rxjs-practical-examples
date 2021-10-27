@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { UserStorageService } from '../../services/user-storage.service'
 
 @Component({
     selector: 'app-autocomplete',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core'
 })
 export class AutocompleteComponent implements OnInit {
 
-    constructor() { }
+    constructor(private userStorageService: UserStorageService) {
+
+    }
 
     ngOnInit(): void {
     }
