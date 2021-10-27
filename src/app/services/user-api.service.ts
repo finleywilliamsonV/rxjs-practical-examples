@@ -1,10 +1,20 @@
+import {
+    delay,
+    finalize,
+    map,
+    mergeMap,
+    take,
+    takeWhile,
+    tap
+} from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { map, take } from 'rxjs/operators'
-import { Observable } from 'rxjs'
+import { interval, Observable, of } from 'rxjs'
 import { User } from '../models/user.model'
 import { UserApiResult, UserData } from '../models/user-api-result.model'
+import { getPlaceholderUser } from '../models/user.functions'
 
+const USE_PLACEHOLDER_USERS = true
 @Injectable({
     providedIn: 'root',
 })
@@ -25,11 +35,32 @@ export class UserApiService {
      */
     fetchNewUser(): Observable<User> {
 
+        // set this true during development, so we don't overload the API
+        if (USE_PLACEHOLDER_USERS) {
+            return of(getPlaceholderUser())
+                .pipe(
+                    // built-in delay
+                    delay(100)
+                )
+        }
+
         // fetch user data from endpoint and parse
         return this.httpClient.get<UserApiResult>('https://randomuser.me/api/')
             .pipe(
                 map(UserApiService.trimUserData),
                 take(1)
+            )
+    }
+
+    /**
+     * Fetches a batch of users and emits the requests in a stream
+     * @returns An observable of the fetched users
+     */
+    fetchBatchUsers(numberOfUsers: number): Observable<User> {
+        return interval()
+            .pipe(
+                takeWhile((userNumber: number) => userNumber < numberOfUsers),
+                mergeMap(() => this.fetchNewUser())
             )
     }
 
