@@ -5,11 +5,11 @@ import { User } from '../../models/user.model'
 import { UserApiService } from '../../services/user-api.service'
 
 @Component({
-    selector: 'app-autocomplete',
-    templateUrl: './autocomplete.component.html',
-    styleUrls: ['./autocomplete.component.scss'],
+    selector: 'app-directory',
+    templateUrl: './directory.component.html',
+    styleUrls: ['./directory.component.scss'],
 })
-export class AutocompleteComponent implements OnInit {
+export class DirectoryComponent implements OnInit {
 
     public users: User[]
     public input$: Subject<string>
