@@ -3,42 +3,7 @@
         <div class="col-12">
 
             
-            <label for="wordsWith">Show Words with All of These Letters:</label>
 
-            <div class="input-group">
-                <input
-                    name="wordsWith"
-                    (input)="onInputEvent($event)"
-                    type="text"
-                    class="form-control"
-                    #wordsWithInput>
-                <div class="input-group-append">
-                    <button
-                        class="btn btn-danger"
-                        (click)="clearInput()">
-                        Clear
-                    </button>
-                </div>
-            </div>
-
-            <label
-                for="userSearchInput"
-                class="form-label">
-                Search Users by Name
-            </label>
-            <input
-                class="form-control"
-                list="userOptions"
-                id="userSearchInput"
-                placeholder="Type to search...">
-            <datalist id="userOptions">
-                <option
-                    *ngFor="let user of users"
-                    [value]="user.name">
-                </option>
-                <option value="San Francisco"></option>
-            </datalist>
-            {{input$ | async}}
         </div>
     </div>
 </div>

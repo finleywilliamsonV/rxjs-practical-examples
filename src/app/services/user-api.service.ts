@@ -1,11 +1,9 @@
 import {
     delay,
-    finalize,
     map,
     mergeMap,
     take,
-    takeWhile,
-    tap
+    takeWhile
 } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
